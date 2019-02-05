@@ -1,28 +1,19 @@
 import spotipy
 import sys
-import pprint
 import spotipy.util as util
 import os
 import webbrowser
-import base64
-from os.path import join, dirname
-from dotenv import load_dotenv
-
-#Enviroment variable declaration
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+from config import Config
 
 scope = 'user-read-playback-state'
 
 twy = 'spotify:artist:0nq64XZMWV1s7XHXIkdH7K'
 
-cli_id = os.getenv('CLI_ID')
-cli_secret = os.getenv('CLI_SEC')
-redir = os.getenv('REDIRECT_URI')
+env_obj = Config()
 
 def getStream(username):
 
-    token = util.prompt_for_user_token(username, scope=scope, client_id=cli_id, client_secret=cli_secret, redirect_uri = redir)
+    token = util.prompt_for_user_token(username, scope=scope, client_id=env_obj.cli_id, client_secret=env_obj.cli_secret, redirect_uri = env_obj.redirect_uri)
 
     if token:
         sp = spotipy.Spotify(auth=token)
