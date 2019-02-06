@@ -1,5 +1,6 @@
-function startStreamFunction() {
-	var audio = new Audio(resp);
+function startStreamFunction(urlLink) {
+
+	var audio = new Audio(urlLink);
 	var playPromise = document.querySelector('audio').play();
 	if (playPromise !== undefined) {
              playPromise.then(() => {

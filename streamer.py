@@ -23,7 +23,7 @@ def getStream(username):
         topT = sp.artist_top_tracks(twy)
 
         for track in topT['tracks'][:3]:
-            print('audio :' + track['preview_url'])
+            print('audio : ' + track['preview_url'])
             lastTrack = track['preview_url']
 
         print(lastTrack)
@@ -44,16 +44,17 @@ def openBrowser(url):
         <head>
             <Title> Streaming window </Title>
             <script type="text/javascript" src="./index.js">
-                startStreamFunction();
              </script>
         </head>
-        <body>
-            <audio controls>
+        <body onload="startStreamFunction('http://localhost:8808')">
+            <audio autoplay="autoplay" controls="controls">
+            <!-- I'm so so sorry about this autoplay -->
                 <source src=%s type="audio/mpeg">
+                <p>If you can read this, your browser does not support the audio element.</p>
             </audio>
         </body>
     </html>
-    """ % (url)
+    """ % (url, url)
 
     path = os.path.abspath('index.html')
     actual_url = "file://" + path
